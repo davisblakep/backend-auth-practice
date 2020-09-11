@@ -17,17 +17,17 @@ module.exports = {
       directory: './data/seeds',
     },
   },
-  production: {
-    //optional if use Postgres for production
-    client: 'pg',
-    connection: process.env.DATABASE_URL,
-    migrations: {
-      directory: './data/migrations',
-    },
-    seeds: {
-      directory: './data/seeds',
-    },
-  },
+  // production: {
+  //   //optional if use Postgres for production
+  //   client: 'pg',
+  //   connection: process.env.DATABASE_URL,
+  //   migrations: {
+  //     directory: './data/migrations',
+  //   },
+  //   seeds: {
+  //     directory: './data/seeds',
+  //   },
+  // },
   testing: {
     //optional if use sqlite3 for testing
     client: 'sqlite3',
