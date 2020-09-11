@@ -6,19 +6,11 @@ exports.seed = function (knex, Promise) {
       // Inserts seed entries
       return knex('users').insert([
         {
+          firstname: 'Blake',
+          lastname: 'Davis',
           username: 'bdavis',
           password:
-            '$2a$10$TxPuQorlWTbJo2Vqh7Pk0OKV0QxTrERzGet0LDeVVwkbEivNouiMS',
-        },
-        {
-          username: 'fwallaby',
-          password:
-            '$2a$10$RJj9FjEgrFDYdH8HSIwliufudALkAvTI76EG9aDCZCazoqwF4CBbW',
-        },
-        {
-          username: 'lfrank',
-          password:
-            '$2a$10$9l7GmZbAlgBU7N00UzbmEOIIO1h7oF41wgC1plLcZAoFI6uC/5Any',
+            '$2a$10$ZwcZDiyzbqXerbb5GLalWOwwmHry6Lgs873BGQhQx1Tec4zolBtEi',
         },
       ]);
     });
