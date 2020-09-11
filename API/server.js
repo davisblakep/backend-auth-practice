@@ -1,6 +1,8 @@
 const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
+const http = require('http');
+const path = require('path');
 
 const authRouter = require('../users/auth-router.js');
 const usersRouter = require('../users/users-router.js');
@@ -15,8 +17,13 @@ server.use(cors());
 server.use('/api/auth', authRouter);
 server.use('/api/users', restricted, usersRouter);
 
-server.get('/', (req, res) => {
-  res.status(200).json({ api: 'up' });
+// server.get('/', (req, res) => {
+//   res.status(200).json({ api: 'up' });
+// });
+
+server.use('/', function (req, res) {
+  res.sendFile(path.join(__dirname + '/express/index.html'));
+  //__dirname : It will resolve to your project folder.
 });
 
 module.exports = server;
