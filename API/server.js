@@ -3,6 +3,7 @@ const helmet = require('helmet');
 const cors = require('cors');
 const http = require('http');
 const path = require('path');
+const morgan = require('morgan');
 
 const authRouter = require('../users/auth-router.js');
 const usersRouter = require('../users/users-router.js');
@@ -13,6 +14,7 @@ const server = express();
 server.use(helmet());
 server.use(express.json());
 server.use(cors());
+server.use(morgan('common'));
 
 server.use('/api/auth', authRouter);
 server.use('/api/users', restricted, usersRouter);
