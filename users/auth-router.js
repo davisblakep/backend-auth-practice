@@ -6,7 +6,7 @@ const { jwtSecret } = require('../config/secrets.js');
 const Users = require('./users-model.js');
 
 // for endpoints beginning with /api/auth
-router.post('/register', validateUserContent, (req, res) => {
+router.post('/register', validateUserSignup, (req, res) => {
   let user = req.body;
   const hash = bcrypt.hashSync(user.password, 10); // 2 ^ n
   user.password = hash;
@@ -22,7 +22,7 @@ router.post('/register', validateUserContent, (req, res) => {
     });
 });
 
-router.post('/login', validateUserContent, (req, res) => {
+router.post('/login', validateUserLogin, (req, res) => {
   let { username, password } = req.body;
 
   Users.findBy({ username })
@@ -61,19 +61,28 @@ function generateToken(user) {
 
 // ---------------------- Custom Middleware ---------------------- //
 
-function validateUserContent(req, res, next) {
+function validateUserSignup(req, res, next) {
   if (
     !req.body.username ||
     !req.body.password ||
     !req.body.firstname ||
     !req.body.lastname
   ) {
-    res
-      .status(400)
-      .json({
-        message:
-          'First Name, Last Name, Username, and Password fields are required.',
-      });
+    res.status(400).json({
+      message:
+        'First Name, Last Name, Username, and Password fields are required.',
+    });
+  } else {
+    next();
+  }
+}
+
+function validateUserLogin(req, res, next) {
+  if (!req.body.username || !req.body.password) {
+    res.status(400).json({
+      message:
+        'First Name, Last Name, Username, and Password fields are required.',
+    });
   } else {
     next();
   }
